@@ -3,9 +3,9 @@
     <thead>
       <tr>
         <th class="item-table-header">日付</th>
-        <th class="item-table-header">費目詳細</th>
-        <th class="item-table-header">摘要</th>
+        <th class="item-table-header">費目</th>
         <th class="item-table-header">金額</th>
+        <th class="item-table-header">メモ</th>
       </tr>
     </thead>
     <tbody>
@@ -13,9 +13,9 @@
         <Item
           :key="index"
           :date="item.date"
-          :expenseDetail="item.expenseDetail"
-          :summary="item.summary"
+          :expenseType="item.expenseType"
           :expense="item.expense"
+          :memo="item.memo"
         />
       </template>
     </tbody>

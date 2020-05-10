@@ -1,9 +1,9 @@
 <template>
   <tr>
     <td class='item-date'>{{ date }}</td>
-    <td class='item-expense-detail'>{{ expenseDetail }}</td>
-    <td class='item-summary'>{{ summary }}</td>
+    <td class='item-expense-detail'>{{ expenseType }}</td>
     <td class='item-expense'>{{ expense }}</td>
+    <td class='item-memo'>{{ memo }}</td>
   </tr>
 </template>
 
@@ -14,15 +14,15 @@ export default {
       type: String,
       required: true,
     },
-    expenseDetail: {
-      type: String,
-      required: true,
-    },
-    summary: {
+    expenseType: {
       type: String,
       required: true,
     },
     expense: {
+      type: Number,
+      required: true,
+    },
+    memo: {
       type: String,
       required: true,
     }

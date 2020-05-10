@@ -2,16 +2,17 @@
   <main class="main-container">
     <h2>年間予算の達成状況</h2>
     <div class="chart-container">
-      <chart></chart>
+      <chart :items="sortedItems"></chart>
     </div>
     <h2>直近の支出状況</h2>
-    <ItemList :items="reversedItems" />
+    <ItemList :items="sortedItems" />
   </main>
 </template>
 
 <script>
 import ItemList from "@/components/ItemList.vue";
 import Chart from "./Chart.vue";
+const ItemDB = require('../MockDB');
 
 export default {
   components: {
@@ -20,30 +21,17 @@ export default {
   },
   data() {
     return {
-      items: [
-        {
-          date: "date",
-          expenseDetail: "expenseDetail",
-          summary: "summary",
-          expense: "expense"
-        },
-        {
-          date: "yyyy/mm/dd",
-          expenseDetail: "hoge",
-          summary: "fuga",
-          expense: "¥1,980"
-        }
-      ]
+      items: []
     };
   },
   computed: {
-    reversedItems() {
-      return this.items.slice().reverse();
+    sortedItems() {
+      return ItemDB.findAll();
     }
   },
   methods: {
     onPost(item) {
-      this.item.push(item);
+      this.items.push(item);
     }
   }
 };
