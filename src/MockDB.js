@@ -35,7 +35,7 @@ module.exports = {
     return items.slice();
   },
   create:({ date, expenseType, expense, memo }) => {
-    const item = new item({
+    const item = new Item({
       date: date,
       expenseType: expenseType,
       expense: expense,

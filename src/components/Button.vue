@@ -25,7 +25,7 @@ export default {
   display: inline-block;
   background: red;
   color: white;
-  padding: 10px;
+  padding: 7px;
   cursor: pointer;
 
   /* 角丸の指定 */

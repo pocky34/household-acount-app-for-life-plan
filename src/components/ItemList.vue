@@ -49,12 +49,15 @@ export default {
 <style scoped>
 .item-table {
   border-collapse: collapse;
-  width: calc(100% - 40px);
-  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .item-table-header {
   background-color:lightblue;
   border: 1px solid #88888888;
   vertical-align: middle;
+}
+th {
+  width: 120px;
 }
 </style>

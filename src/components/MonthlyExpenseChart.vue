@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <line-chart :chartdata="chartdata" :options="options" />
+    <line-chart :chartData="chartdata" :options="options" />
   </div>
 </template>
 
@@ -59,7 +59,7 @@ export default {
               },
               ticks: {
                 beginAtZero: true,
-                stepSize: 50000 
+                stepSize: 50000
               }
             }
           ]

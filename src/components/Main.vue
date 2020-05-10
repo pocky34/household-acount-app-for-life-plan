@@ -3,36 +3,55 @@
     <h2>年間予算の達成状況</h2>
     <monthly-expense-chart :budget="budget" :expenses="expenses" />
     <h2>直近の支出状況</h2>
-    <ItemList :items="reversedItems" />
+    <item-list :items="items" />
+    <input-box :onPost="onPost" />
   </main>
 </template>
 
 <script>
-import ItemList from "@/components/ItemList.vue";
-import MonthlyExpenseChart from "./MonthlyExpenseChart.vue"
+import MonthlyExpenseChart from "./MonthlyExpenseChart.vue";
+import ItemList from "./ItemList.vue";
+import InputBox from "./InputBox.vue";
 const ItemDB = require("../MockDB");
 
 export default {
   components: {
-    ItemList,
     MonthlyExpenseChart,
+    ItemList,
+    InputBox
   },
   data() {
-   return {
-     budget: 500000,
-     expenses: [160000, 20000, 10000]
-   };
+    return {
+      budget: 500000,
+      expenses: [],
+      items: []
+    };
   },
-  computed: {
-    reversedItems() {
-      return ItemDB.findAll().slice().reverse();
+  methods: {
+    update() {
+      this.items = ItemDB.findAll();
+
+      this.expenses = new Array(12).fill(0);
+      for (const item of this.items) {
+        const dateObj = new Date(item.date);
+        this.expenses[dateObj.getMonth()] += item.expense;
+      }
+      // まだ入力のない月のデータを削除
+      for (let month = 12; month >= 0; month--){
+        if(this.expenses[month-1] == 0){
+          this.expenses.pop();
+        }else{
+          break;
+        }
+      }
     },
-    getBudget() {
-      return 800000;
-    },
-    getExpenses() {
-      return [0, 300000, 20000, 10000];
+    onPost(item) {
+      ItemDB.create(item);
+      this.update();
     }
+  },
+  created() {
+    this.update();
   }
 };
 </script>
