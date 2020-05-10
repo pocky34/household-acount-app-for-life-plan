@@ -2,8 +2,8 @@
 <aside class="menu">
   <ul class="menu-list">
     <li class="menu-list-title active">レポート</li>
-    <li class="menu-list-title">支出入力</li>
-    <li class="menu-list-title">設定</li>
+    <li class="menu-list-title">支出入力(工事中)</li>
+    <li class="menu-list-title">設定(工事中)</li>
   </ul>
 </aside>
 </template>

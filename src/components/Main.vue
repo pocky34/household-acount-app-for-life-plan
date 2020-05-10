@@ -1,37 +1,37 @@
 <template>
   <main class="main-container">
     <h2>年間予算の達成状況</h2>
-    <div class="chart-container">
-      <chart :items="sortedItems"></chart>
-    </div>
+    <monthly-expense-chart :budget="budget" :expenses="expenses" />
     <h2>直近の支出状況</h2>
-    <ItemList :items="sortedItems" />
+    <ItemList :items="reversedItems" />
   </main>
 </template>
 
 <script>
 import ItemList from "@/components/ItemList.vue";
-import Chart from "./Chart.vue";
-const ItemDB = require('../MockDB');
+import MonthlyExpenseChart from "./MonthlyExpenseChart.vue"
+const ItemDB = require("../MockDB");
 
 export default {
   components: {
     ItemList,
-    Chart
+    MonthlyExpenseChart,
   },
   data() {
-    return {
-      items: []
-    };
+   return {
+     budget: 500000,
+     expenses: [160000, 20000, 10000]
+   };
   },
   computed: {
-    sortedItems() {
-      return ItemDB.findAll();
-    }
-  },
-  methods: {
-    onPost(item) {
-      this.items.push(item);
+    reversedItems() {
+      return ItemDB.findAll().slice().reverse();
+    },
+    getBudget() {
+      return 800000;
+    },
+    getExpenses() {
+      return [0, 300000, 20000, 10000];
     }
   }
 };
