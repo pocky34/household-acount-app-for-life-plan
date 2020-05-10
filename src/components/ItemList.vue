@@ -49,8 +49,8 @@ export default {
 <style scoped>
 .item-table {
   border-collapse: collapse;
-  width: 100%;
-  margin: 10px;
+  width: calc(100% - 40px);
+  margin: 20px;
 }
 .item-table-header {
   background-color:lightblue;
