@@ -31,19 +31,20 @@ export default {
     update() {
       this.items = ItemDB.findAll();
 
-      this.expenses = new Array(12).fill(0);
+      let expenses = new Array(12).fill(0);
       for (const item of this.items) {
         const dateObj = new Date(item.date);
-        this.expenses[dateObj.getMonth()] += item.expense;
+        expenses[dateObj.getMonth()] += item.expense;
       }
       // まだ入力のない月のデータを削除
       for (let month = 12; month >= 0; month--){
-        if(this.expenses[month-1] == 0){
-          this.expenses.pop();
+        if(expenses[month-1] == 0){
+          expenses.pop();
         }else{
           break;
         }
       }
+      this.expenses = expenses;
     },
     onPost(item) {
       ItemDB.create(item);
