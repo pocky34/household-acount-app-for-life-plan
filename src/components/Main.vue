@@ -1,10 +1,16 @@
 <template>
   <main class="main-container">
-    <h2>年間予算の達成状況</h2>
-    <monthly-expense-chart :budget="budget" :expenses="expenses" />
-    <h2>直近の支出状況</h2>
-    <item-list :items="items" />
-    <input-box :onPost="onPost" />
+    <div class="monthly-expense-chart-container" ref="chartContainer">
+      <h2>年間予算の達成状況</h2>
+      <div class="chart-body-container">
+        <monthly-expense-chart :budget="budget" :expenses="expenses" />
+      </div>
+    </div>
+    <div class="recent-expense-container">
+      <h2>直近の支出状況</h2>
+      <item-list :items="items" />
+      <input-box :onPost="onPost" />
+    </div>
   </main>
 </template>
 
@@ -37,10 +43,10 @@ export default {
         expenses[dateObj.getMonth()] += item.expense;
       }
       // まだ入力のない月のデータを削除
-      for (let month = 12; month >= 0; month--){
-        if(expenses[month-1] == 0){
+      for (let month = 12; month >= 0; month--) {
+        if (expenses[month - 1] == 0) {
           expenses.pop();
-        }else{
+        } else {
           break;
         }
       }
@@ -58,13 +64,26 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  height: 16px;
+  font-size: 16px;
+  margin: 10px;
+}
 .main-container {
   width: calc(100% - 200px);
+  height: calc(100% - 60px);
   flex: 1;
   position: absolute;
   left: 200px;
 }
-.chart-container {
-  margin: 20px;
+.monthly-expense-chart-container {
+  width: auto;
+  height: 60%;
+}
+.recent-expense-container {
+  height: 40%;
+}
+.chart-body-container {
+  height: calc(100% - 36px);
 }
 </style>

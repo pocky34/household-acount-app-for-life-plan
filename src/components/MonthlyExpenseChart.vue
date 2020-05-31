@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <line-chart :chart-data="getDataCollection()" :options="options" />
+    <line-chart :chart-data="getDataCollection()" :options="options" :styles="myStyles" />
   </div>
 </template>
 
@@ -23,7 +23,10 @@ export default {
   },
   data() {
     return {
+      height: '100px',
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           xAxes: [
             {
@@ -50,6 +53,11 @@ export default {
     };
   },
   methods: {
+    handleResize() {
+      console.log("MonthlyExpenseChart.vue:handleResize");
+      console.log(this.$el.offsetHeight);
+      this.height = this.$el.offsetHeight;
+    },
     getDataCollection() {
       const budgetData = new Array(13).fill(this.budget);
       let guideLineData = [];
@@ -109,9 +117,28 @@ export default {
         datasets: newDatasets
       };
     },
+  },
+  mounted() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize();
+  },
+  beforeDestroy: function () {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  computed: {
+    myStyles() {
+      return {
+        height: `${this.height}px`,
+        width: '100%',
+        position: 'relative'
+      };
+    }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.chart-container {
+  height: 100%;
+}
 </style>
