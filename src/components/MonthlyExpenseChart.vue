@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <line-chart :chart-data="getDataCollection()" :options="options" :styles="myStyles" />
+    <line-chart :chart-data="getDataCollection()" :options="options" :height="240" />
   </div>
 </template>
 
@@ -21,44 +21,33 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
-      height: '100px',
       options: {
         responsive: true,
-        maintainAspectRatio: false,
         scales: {
-          xAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: "月"
-              }
-            }
-          ],
           yAxes: [
             {
-              scaleLabel: {
-                display: true,
-                labelString: "金額"
-              },
               ticks: {
                 beginAtZero: true,
-                stepSize: 50000
+                max: 600000,
+                stepSize: 100000
               }
             }
           ]
+        },
+        legend: {
+          labels: {
+            filter: function (item) {
+              return item.text != 'ガイドライン';
+            }
+          }
         }
       }
     };
   },
   methods: {
-    handleResize() {
-      console.log("MonthlyExpenseChart.vue:handleResize");
-      console.log(this.$el.offsetHeight);
-      this.height = this.$el.offsetHeight;
-    },
-    getDataCollection() {
+    getDataCollection () {
       const budgetData = new Array(13).fill(this.budget);
       let guideLineData = [];
       for (let month = 0; month <= 12; month++) {
@@ -75,25 +64,29 @@ export default {
         {
           label: "年間予算",
           data: budgetData,
-          borderColor: "#EE0000",
+          borderColor: "#ff4444",
           borderWidth: 1,
+          pointRadius: 0,
           fill: false,
           type: "line"
         },
         {
           label: "ガイドライン",
           data: guideLineData,
-          borderColor: "#00EE00",
+          borderColor: "#888888",
           borderWidth: 1,
+          borderDash: [4, 2],
+          pointRadius: 0,
           fill: false,
           type: "line"
         },
         {
           label: "実績累積",
           data: cumulativeExpenseData,
-          borderColor: "#0000EE",
+          borderColor: "#007e33",
           borderWidth: 1,
-          fill: false,
+          backgroundColor: "#00c851",
+          fill: true,
           type: "line",
           lineTension: 0
         }
@@ -118,27 +111,8 @@ export default {
       };
     },
   },
-  mounted() {
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize();
-  },
-  beforeDestroy: function () {
-    window.removeEventListener('resize', this.handleResize)
-  },
-  computed: {
-    myStyles() {
-      return {
-        height: `${this.height}px`,
-        width: '100%',
-        position: 'relative'
-      };
-    }
-  }
 };
 </script>
 
 <style scoped>
-.chart-container {
-  height: 100%;
-}
 </style>
