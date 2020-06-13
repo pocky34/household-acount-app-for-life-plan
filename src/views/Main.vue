@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <v-container fluid fill-height>
-      <v-row>
-        <v-col cols="12">
-          <monthly-expense-chart-card />
-        </v-col>
-        <v-col cols="12">
-          <recent-expense-table-card />
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12">
+        <monthly-expense-chart-card />
+      </v-col>
+      <v-col cols="12">
+        <recent-expense-table-card />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
