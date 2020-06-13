@@ -64,7 +64,7 @@ export default {
         {
           label: "年間予算",
           data: budgetData,
-          borderColor: "#ff4444",
+          borderColor: this.$vuetify.theme.themes.light.accent,
           borderWidth: 1,
           pointRadius: 0,
           fill: false,
@@ -73,7 +73,7 @@ export default {
         {
           label: "ガイドライン",
           data: guideLineData,
-          borderColor: "#888888",
+          borderColor: this.$vuetify.theme.themes.light.secondary,
           borderWidth: 1,
           borderDash: [4, 2],
           pointRadius: 0,
@@ -83,9 +83,9 @@ export default {
         {
           label: "実績累積",
           data: cumulativeExpenseData,
-          borderColor: "#007e33",
+          borderColor: this.$vuetify.theme.themes.light.secondary,
           borderWidth: 1,
-          backgroundColor: "#00c851",
+          backgroundColor: this.$vuetify.theme.themes.light.primary,
           fill: true,
           type: "line",
           lineTension: 0

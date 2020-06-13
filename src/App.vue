@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
     <v-navigation-drawer app v-model="drawer" clipped>
       <v-container>
         <v-list dense nav>
@@ -11,11 +11,14 @@
               <v-list-item-title>{{ nav_list.name }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item>
+            <v-switch v-model="$vuetify.theme.dark" hide-details inset label="Dark"></v-switch>
+          </v-list-item>
         </v-list>
       </v-container>
     </v-navigation-drawer>
 
-    <v-app-bar app color="cyan" dark clipped-left class="darken-1">
+    <v-app-bar app dark clipped-left color="primary">
       <v-app-bar-nav-icon @click="drawer=!drawer" />
       <v-toolbar-title v-if="$vuetify.breakpoint.smAndUp">家計簿アプリ for ライフプランニング</v-toolbar-title>
       <v-toolbar-title v-if="$vuetify.breakpoint.xsOnly" class="pl-0">家計簿アプリ</v-toolbar-title>
@@ -39,5 +42,10 @@ export default {
       { name: 'このアプリについて', icon: 'mdi-information', link: '/about' },
     ]
   }),
+  computed: {
+    theme () {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    }
+  }
 };
 </script>
