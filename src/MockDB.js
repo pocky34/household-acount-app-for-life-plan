@@ -1,3 +1,15 @@
+const expenseTypes = [
+  '基本生活費',
+  'その他生活費',
+  '住宅ローン',
+  '家賃・管理費等',
+  '生命保険料',
+  '一時的な支出',
+  '教育費',
+  '車関連費',
+  '奨学金'
+];
+
 const items = [];
 let nextId = 1;
 
@@ -31,10 +43,13 @@ items.push(new Item({
 }));
 
 module.exports = {
+  getExpenseTypes: () => {
+    return expenseTypes;
+  },
   findAll: () => {
     return items.slice();
   },
-  create:({ date, expenseType, expense, memo }) => {
+  create: ({ date, expenseType, expense, memo }) => {
     const item = new Item({
       date: date,
       expenseType: expenseType,
@@ -45,9 +60,9 @@ module.exports = {
 
     return item;
   },
-  update:({ id, date, expenseType, expense, memo }) => {
+  update: ({ id, date, expenseType, expense, memo }) => {
     const item = items.find(item => id === item.id);
-    if(!item){
+    if (!item) {
       throw new Error('not found');
     }
 
@@ -60,7 +75,7 @@ module.exports = {
   },
   remove: (id) => {
     const targetIndex = items.findIndex(item => id === item.id);
-    if(targetIndex === -1){
+    if (targetIndex === -1) {
       throw new Error('not found');
     }
 

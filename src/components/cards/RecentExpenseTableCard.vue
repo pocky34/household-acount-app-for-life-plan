@@ -4,13 +4,45 @@
     <v-container>
       <v-data-table dense :headers="headers" :items="items" disable-sort hide-default-footer />
     </v-container>
+    <v-container>
+      <v-row dense>
+        <v-col cols="10">
+          <v-spacer />
+        </v-col>
+        <v-col cols="2">
+          <v-dialog v-model="dialog" persistent>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn fab color="secondary" v-bind="attrs" v-on="on">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </template>
+            <input-expense-card :onPost="onPost" :onCancel="onCancel" />
+          </v-dialog>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-card>
 </template>
 
 <script>
+import InputExpenseCard from '@/components/cards/InputExpenseCard.vue';
 const ItemDB = require("../../MockDB.js");
 
 export default {
+  components: {
+    InputExpenseCard,
+  },
+  methods: {
+    onPost () {
+      console.log('onPost');
+      this.dialog = false;
+      this.items = ItemDB.findAll();
+    },
+    onCancel () {
+      console.log('onCancel')
+      this.dialog = false;
+    }
+  },
   data () {
     return {
       headers: [
@@ -19,7 +51,8 @@ export default {
         { text: "金額", value: 'expense' },
         { text: "メモ", value: 'memo' },
       ],
-      items: []
+      items: [],
+      dialog: false,
     };
   },
   created () {

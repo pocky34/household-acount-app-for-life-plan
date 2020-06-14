@@ -37,7 +37,7 @@ export default {
     drawer: null,
     nav_lists: [
       { name: 'ダッシュボード', icon: 'mdi-view-dashboard', link: '/' },
-      { name: '支出入力', icon: 'mdi-pen' },
+      { name: '支出入力', icon: 'mdi-pen', link: '/input' },
       { name: '設定', icon: 'mdi-cogs' },
       { name: 'このアプリについて', icon: 'mdi-information', link: '/about' },
     ]
