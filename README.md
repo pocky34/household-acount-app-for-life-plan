@@ -1,24 +1,16 @@
-# household-aacount-app
+# 家計簿アプリ for ライププラン
 
-## Project setup
-```
-npm install
-```
+## アプリの概要
+家計がライフプラン診断どおりに推移しているかを確認するアプリです。
+先日FPにライフプラン診断をやってもらったのですが、自宅で使っていたExcelの家計簿ではライフプラン診断どおりになっているかどうかの確認ができなかったので、Excelの改造をして見える化をしました。そのExcelをWebアプリ化したものです。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 使い方
+メニューから支出入力を選択し、+マークをクリックすると支出が入力できます。
+入力したら支出一覧に反映され、さらにダッシュボードページのグラフが更新されます。
+ダッシュボードページを見ることでFPに設定してもらった予算を超えそうかどうかが
+グラフ上から確認できます。
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 技術スタック
+- フロントエンド
+  - Vue.js
+  - Vuetify.js
